@@ -1,3 +1,39 @@
 body {
-    background-color: #808080;
+    display: grid;
+    grid-template-rows: 1fr 1fr 4.5fr;
+    height: 100vh;
+    margin: 0;
+    background-image: url('geopattern');
+}
+
+h2 {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.button-container {
+    justify-content: end;
+    display: flex;
+    align-items: end;
+    padding-right: 25px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-rows: repeat(3, 1fr);
+    margin: 18px;
+    background-color: #ffffff;
+    border: 6px ridge #e67300;
+    box-shadow: 2px 2px 6px 2px #262626;
+}
+
+.card {
+    width: 150px;
+    height: 200px;
+    padding: 12px;
+    font-size: 1rem;
+    text-align: center;
+    border: 2px solid black;
+    box-shadow: 1px 1px 4px #808080;
 }
