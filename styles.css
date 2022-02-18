@@ -1,116 +1,116 @@
 body {
-    display: grid;
-    grid-template-rows: 1fr 1fr 4.5fr;
-    height: 100vh;
-    margin: 0;
-    background-image: url('geopattern');
-  }
-  
-  h2 {
-    text-align: center;
-    padding-top: 50px;
-  }
-  
-  /* Add book button */
-  .button-container {
-    justify-content: end;
-    display: flex;
-    align-items: end;
-    padding-right: 25px;
-  }
-  
-  .button-add-book {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    background-color: lightgreen;
-    color: white;
-    font-size: 1.5rem;
-    border-radius: 8px;
-    padding: 0px 4px;
-  }
-  
-  .button-add-book > div:first-child{
-    font-size: 1.5rem;
-  }
-  
-  .button-add-book > div:last-child {
-    font-size: 0.9rem;
-  }
-  
-  /* Book cards */
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-template-rows: repeat(3, 1fr);
-    margin-top: 11px;
-    margin-bottom: 18px;
-    margin-right: 18px;
-    margin-left: 18px;
-    background-color: #ffffff;
-    border: 6px ridge #e67300;
-    box-shadow: 2px 2px 6px 2px #262626;
-  }
-  
-  .card {
-    width: 150px;
-    height: 200px;
-    padding: 12px;
-    font-size: 1rem;
-    text-align: center;
-    border: 2px solid black;
-    box-shadow: 1px 1px 4px #808080;
-  }
-  
-  /* Modal box (pop-up form) */
-  .popup-form {
-    display: none;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -15%);
-    flex-direction: column;
-    align-items: center;
-    padding: 12px;
-    height: 400px;
-    width: 300px;
-    background-color: white;
-    white-space: pre-line;
-    border: 3px solid black;
-    box-shadow: 2px 2px 6px 2px #808080;
-  }
+  display: grid;
+  grid-template-rows: 1fr 1fr 4.5fr;
+  height: 100vh;
+  margin: 0;
+  background-image: url('geopattern');
+}
 
-  .radio {
-    display: flex;
-  }
+h2 {
+  text-align: center;
+  padding-top: 50px;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+/* Add book button */
+.button-container {
+  justify-content: end;
+  display: flex;
+  align-items: end;
+  padding-right: 25px;
+}
 
-  form > label, form > input, form > .radio {
-    margin: 4px 0px;
-  }
+.button-add-book {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  background-color: lightgreen;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  padding: 0px 4px;
+}
 
-  .radio {
-    justify-content: space-evenly;
-  }
+.button-add-book>div:first-child {
+  font-size: 1.5rem;
+}
 
-  #form-btn {
-    align-self: center;
-  }
-  
-  .close-form {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    align-self: end;
-  }
-  
-  .close-form:hover,
-  .close-form:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
+.button-add-book>div:last-child {
+  font-size: 0.9rem;
+}
+
+/* Book cards */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-rows: repeat(3, 1fr);
+  margin-top: 11px;
+  margin-bottom: 18px;
+  margin-right: 18px;
+  margin-left: 18px;
+  background-color: #ffffff;
+  border: 6px ridge #e67300;
+  box-shadow: 2px 2px 6px 2px #262626;
+  overflow: auto;
+  padding: 8px;
+  gap: 12px;
+}
+
+.card {
+  height: 200px;
+  text-align: center;
+  border: 2px solid black;
+  box-shadow: 1px 1px 4px #808080;
+}
+
+/* Modal box (pop-up form) */
+.popup-form {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -15%);
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  height: 400px;
+  width: 300px;
+  background-color: white;
+  white-space: pre-line;
+  border: 3px solid black;
+  box-shadow: 2px 2px 6px 2px #808080;
+}
+
+.radio {
+  display: flex;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form>label, form>input, form>.radio {
+  margin: 4px 0px;
+}
+
+.radio {
+  justify-content: space-evenly;
+}
+
+#form-btn {
+  align-self: center;
+}
+
+.close-form {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  align-self: end;
+}
+
+.close-form:hover,
+.close-form:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
