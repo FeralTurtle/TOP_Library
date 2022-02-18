@@ -64,7 +64,10 @@ body {
   
   /* Modal box (pop-up form) */
   .popup-form {
-    display: flex;
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -15%);
     flex-direction: column;
     align-items: center;
     padding: 12px;
