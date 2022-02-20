@@ -10,8 +10,9 @@ function addBookToLibrary() {
     alert('Please enter all the required information');
     return;
   }
-  const newBook = new Book(author.value, title.value, pages.value, readBool());
+  const newBook = new Book(author.value, title.value, pages.value, readBool()); //User text input values into newBook object
   userLibrary.push(newBook);
+  makeCard();
   clearInputFields();
 }
 
@@ -46,33 +47,77 @@ function readBool() {
   };
 }
 
+function makeCard() {
+  cardIndex = userLibrary.length;
+
+  const cardContainer = document.querySelector('.card-container');
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.setAttribute('data-index', cardIndex);
+
+  const removeCardBtn = document.createElement('div');
+  removeCardBtn.setAttribute('data-index', cardIndex);
+  removeCardBtn.textContent = 'x';
+  removeCardBtn.addEventListener('click', removeCard);
+  const authorField = document.createElement('h4');
+  const titleField = document.createElement('h5');
+  const pagesField = document.createElement('p');
+  const readField = document.createElement('p');
+  readField.setAttribute('data-index', cardIndex);
+  const toggleReadBtn = document.createElement('button');
+  toggleReadBtn.classList.add('toggle-read-btn');
+  toggleReadBtn.setAttribute('data-index', cardIndex);
+  toggleReadBtn.addEventListener('click', toggleReadStatus);
+  readField.setAttribute('data-index', cardIndex);
+  authorField.textContent = author.value;
+  titleField.textContent = title.value;
+  pagesField.textContent = pages.value;
+  readField.textContent = readBool();
+  card.append(removeCardBtn);
+  card.append(authorField);
+  card.append(titleField);
+  card.append(pagesField);
+  card.append(readField);
+  card.append(toggleReadBtn);
+
+  cardContainer.append(card);
+}
+
 function clearInputFields() {
   textFields.forEach(input => input.value = '');
   radioButtons.forEach(btn => btn.checked = false);
 }
 
-function makeCard() {
-  const card = document.createElement('div');
-  card.classList.add('card');
+function removeCard() {
+  let currentIndex = this.dataset.index;
+  const card = document.querySelector(`div[data-index="${currentIndex}"]`);
 
-  const authorField = document.createElement('h4');
-  authorField.textContent = 'lorem ipsum';
-  card.append(authorField);
-  const titleField = document.createElement('h5');
-  titleField.textContent = 'lorem ipsum';
-  card.append(titleField);
-  const pagesField = document.createElement('p');
-  pagesField.textContent = 'lorem ipsum';
-  card.append(pagesField);
-  const readField = document.createElement('p');
-  readField.textContent = 'lorem ipsum';
-  card.append(readField);
+  userLibrary.splice(currentIndex, 1);
+  card.remove();
 
-  const cardContainer = document.querySelector('.card-container');
-  cardContainer.append(card);
+  const cards = document.querySelectorAll('.card[data-index]');
+  cards.forEach(item => {
+    if (item.dataset.index > currentIndex) {
+      item.dataset.index -= 1;
+    }
+  });
+}
+
+function toggleReadStatus() {
+  let currentIndex = this.dataset.index;
+
+  const readField = document.querySelector(`.card>p+p[data-index="${currentIndex}"]`);
+  readField.style.backgroundColor = '#808080';
+
+  if (readField.textContent == 'read') {
+    readField.textContent = 'notRead';
+  } else {
+    readField.textContent = 'read';
+  };
 }
 
 let userLibrary = [];
+let cardIndex = -1;
 //Form text inputs
 const author = document.querySelector('#author');
 const title = document.querySelector('#title');
@@ -93,7 +138,3 @@ const closeFormBtn = document.querySelector('.close-form');
 addBookBtn.addEventListener('click', () => popupForm.style.display = "flex");
 closeFormBtn.addEventListener('click', () => popupForm.style.display = "none");
 formSubmitBtn.addEventListener('click', () => console.log(addBookToLibrary()));
-
-for (i=0; i < 22; i++) {
-  makeCard();
-}

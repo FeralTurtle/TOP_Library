@@ -60,6 +60,33 @@ h2 {
   text-align: center;
   border: 2px solid black;
   box-shadow: 1px 1px 4px #808080;
+  max-width: 150px;
+}
+
+.card h4 {
+  margin-top: 0;
+}
+
+.card div {
+  text-align: right;
+  margin-right: 4px;
+}
+
+.card p {
+  margin-bottom: 0;
+}
+
+.toggle-read-btn {
+  background-color: #808080;
+  height: 18px;
+  width: 24px;
+}
+
+.card div:hover,
+.card div:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Modal box (pop-up form) */
