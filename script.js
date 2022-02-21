@@ -10,7 +10,7 @@ function addBookToLibrary() {
     alert('Please enter all the required information');
     return;
   }
-  const newBook = new Book(author.value, title.value, pages.value, readBool()); //User text input values into newBook object
+  const newBook = new Book(author.value, title.value, pages.value, readBool());
   userLibrary.push(newBook);
   makeCard();
   clearInputFields();
@@ -41,44 +41,36 @@ function validateInputs() {
 
 function readBool() {
   if (readYes.checked) {
-    return 'read';
+    return 'Read';
   } else if (readNo.checked) {
-    return 'notRead';
+    return 'Not read';
   };
 }
 
 function makeCard() {
-  cardIndex = userLibrary.length;
-
+  const cardIndex = userLibrary.length - 1;
+  
   const cardContainer = document.querySelector('.card-container');
   const card = document.createElement('div');
-  card.classList.add('card');
-  card.setAttribute('data-index', cardIndex);
-
   const removeCardBtn = document.createElement('div');
-  removeCardBtn.setAttribute('data-index', cardIndex);
-  removeCardBtn.textContent = 'x';
-  removeCardBtn.addEventListener('click', removeCard);
   const authorField = document.createElement('h4');
   const titleField = document.createElement('h5');
   const pagesField = document.createElement('p');
-  const readField = document.createElement('p');
-  readField.setAttribute('data-index', cardIndex);
   const toggleReadBtn = document.createElement('button');
+  card.classList.add('card');
   toggleReadBtn.classList.add('toggle-read-btn');
-  toggleReadBtn.setAttribute('data-index', cardIndex);
+  card.setAttribute('data-index', cardIndex);
+  removeCardBtn.addEventListener('click', removeCard);
   toggleReadBtn.addEventListener('click', toggleReadStatus);
-  readField.setAttribute('data-index', cardIndex);
+
+  removeCardBtn.textContent = 'x';
   authorField.textContent = author.value;
   titleField.textContent = title.value;
   pagesField.textContent = pages.value;
-  readField.textContent = readBool();
-  card.append(removeCardBtn);
-  card.append(authorField);
-  card.append(titleField);
-  card.append(pagesField);
-  card.append(readField);
-  card.append(toggleReadBtn);
+  toggleReadBtn.textContent = readBool();
+
+  const cardFields = [removeCardBtn, authorField, titleField, pagesField, toggleReadBtn];
+  cardFields.forEach(field => card.append(field));
 
   cardContainer.append(card);
 }
@@ -89,35 +81,26 @@ function clearInputFields() {
 }
 
 function removeCard() {
-  let currentIndex = this.dataset.index;
-  const card = document.querySelector(`div[data-index="${currentIndex}"]`);
-
-  userLibrary.splice(currentIndex, 1);
+  const card = this.parentElement;
+  const cardIndex = this.parentElement.dataset.index;
+  userLibrary.splice(cardIndex, 1);
   card.remove();
-
-  const cards = document.querySelectorAll('.card[data-index]');
-  cards.forEach(item => {
-    if (item.dataset.index > currentIndex) {
-      item.dataset.index -= 1;
-    }
-  });
 }
 
 function toggleReadStatus() {
-  let currentIndex = this.dataset.index;
+  const cardIndex = this.parentElement.dataset.index;
+  const toggleReadBtn = document.querySelector(`.card[data-index="${cardIndex}"]>button`);
 
-  const readField = document.querySelector(`.card>p+p[data-index="${currentIndex}"]`);
-  readField.style.backgroundColor = '#808080';
-
-  if (readField.textContent == 'read') {
-    readField.textContent = 'notRead';
+  if (toggleReadBtn.textContent == 'Read') {
+    toggleReadBtn.textContent = 'Not read';
+    toggleReadBtn.style.backgroundColor = '#ff3333';
   } else {
-    readField.textContent = 'read';
+    toggleReadBtn.textContent = 'Read';
+    toggleReadBtn.style.backgroundColor = '#5cd65c';
   };
 }
 
 let userLibrary = [];
-let cardIndex = -1;
 //Form text inputs
 const author = document.querySelector('#author');
 const title = document.querySelector('#title');
@@ -137,4 +120,4 @@ const closeFormBtn = document.querySelector('.close-form');
 
 addBookBtn.addEventListener('click', () => popupForm.style.display = "flex");
 closeFormBtn.addEventListener('click', () => popupForm.style.display = "none");
-formSubmitBtn.addEventListener('click', () => console.log(addBookToLibrary()));
+formSubmitBtn.addEventListener('click', () => addBookToLibrary());

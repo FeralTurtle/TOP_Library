@@ -72,14 +72,10 @@ h2 {
   margin-right: 4px;
 }
 
-.card p {
-  margin-bottom: 0;
-}
-
 .toggle-read-btn {
-  background-color: #808080;
-  height: 18px;
-  width: 24px;
+  border-radius: 8px;
+  width: 50%;
+  background-color: #5cd65c;
 }
 
 .card div:hover,
